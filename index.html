@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Gửi Nguyễn Ngọc Chi Mai</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom right, #ffd6e0, #ffeaea);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .question {
+      margin-top: 80px;
+      font-size: 2.2em;
+      color: #b30059;
+      font-weight: bold;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .buttons {
+      margin-top: 50px;
+      position: relative;
+      height: 100px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4da6;
+      color: white;
+      box-shadow: 0 0 10px #ff4da6;
+    }
+
+    #yesBtn:active {
+      animation: pulse 0.4s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px #ff4da6; }
+      50% { transform: scale(1.1); box-shadow: 0 0 20px #ff1a8c; }
+      100% { transform: scale(1); box-shadow: 0 0 10px #ff4da6; }
+    }
+
+    #noBtn {
+      background-color: #ddd;
+      color: #333;
+      position: absolute;
+    }
+
+    .poem {
+      display: none;
+      margin-top: 60px;
+      font-size: 1.4em;
+      color: #800040;
+      animation: showPoem 1.5s ease forwards;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    @keyframes showPoem {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      width: 15px;
+      height: 15px;
+      background: red;
+      position: absolute;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -7.5px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -7.5px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="question">Em có yêu anh không 🤰</div>
+  <div class="buttons">
+    <button id="yesBtn">Có</button>
+    <button id="noBtn">Không</button>
+  </div>
+
+  <div class="poem" id="poem">
+    <p>
+      Từ khi gặp em, tim anh loạn nhịp,<br>
+      Mỗi ánh mắt em là một vần thơ.<br>
+      Dẫu đời có bao giông gió bất ngờ,<br>
+      Anh chỉ cần em – chẳng mơ điều khác.<br><br>
+      Nguyễn Ngọc Chi Mai, em là cả thế giới của anh!
+    </p>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const poem = document.getElementById('poem');
+    const buttons = document.querySelector('.buttons');
+    const question = document.querySelector('.question');
+
+    yesBtn.addEventListener('click', () => {
+      poem.style.display = 'block';
+      buttons.style.display = 'none';
+      question.style.display = 'none';
+    });
+
+    // Nút "Không" né chuột
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      const scale = 0.8 + Math.random() * 0.5;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.transform = `scale(${scale}) rotate(${Math.random() * 360}deg)`;
+    });
+
+    // Trái tim bay
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = '100%';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  </script>
+</body>
+</html>
