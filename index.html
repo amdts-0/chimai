@@ -36,8 +36,8 @@
     }
 
     .images img {
-      width: 150px;
-      height: 200px;
+      width: 130px;
+      height: 170px;
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -49,9 +49,11 @@
     }
 
     .love-text {
-      font-size: 18px;
+      font-size: 16px;
       color: #444;
       margin: 10px 20px;
+      line-height: 1.6;
+      text-align: center;
     }
 
     .btn {
@@ -93,8 +95,30 @@
       display: inline-block;
       text-align: center;
       line-height: 1.6;
-      max-width: 90%;
       margin-top: 10px;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        font-size: 20px;
+      }
+
+      .images img {
+        width: 100px;
+        height: 130px;
+      }
+
+      .love-text {
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -154,7 +178,11 @@
           setTimeout(typeWriter, 80);
         } else {
           setTimeout(() => {
-            typeText.innerHTML += "<br>" + textLines[1];
+            // Gõ tiếp dòng thứ 2
+            allWords = textLines[1].split(" ");
+            index = 0;
+            currentLine = "";
+            typeWriter();
           }, 600);
         }
       }
