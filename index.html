@@ -1,174 +1,166 @@
-<!DOCTYPE html>
-<html lang="vi">
+<!DOCTYPE html><html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Gửi Nguyễn Ngọc Chi Mai</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gửi Mai yêu dấu</title>
   <style>
     body {
       margin: 0;
-      background: linear-gradient(to bottom right, #ffd6e0, #ffeaea);
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffe0e6);
       text-align: center;
+      overflow: hidden;
     }
-
-    .question {
-      margin-top: 80px;
+    h1 {
       font-size: 2.2em;
-      color: #b30059;
-      font-weight: bold;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .buttons {
+      color: #d6336c;
       margin-top: 50px;
-      position: relative;
-      height: 100px;
+      animation: fadeIn 2s ease-in;
     }
-
-    button {
+    #typed-text {
+      font-size: 1.5em;
+      color: #555;
+      margin: 30px;
+      min-height: 60px;
+      display: none;
+    }
+    #counter {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #8b0000;
+      display: none;
+    }
+    .btn-container {
+      margin-top: 30px;
+    }
+    .btn {
       padding: 15px 30px;
-      font-size: 1.3em;
+      font-size: 1em;
       border: none;
       border-radius: 12px;
+      margin: 10px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
-
-    #yesBtn {
-      background-color: #ff4da6;
+    .yes {
+      background-color: #ff6b81;
       color: white;
-      box-shadow: 0 0 10px #ff4da6;
     }
-
-    #yesBtn:active {
-      animation: pulse 0.4s ease;
+    .no {
+      background-color: #ccc;
+      color: black;
+      position: relative;
     }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px #ff4da6; }
-      50% { transform: scale(1.1); box-shadow: 0 0 20px #ff1a8c; }
-      100% { transform: scale(1); box-shadow: 0 0 10px #ff4da6; }
+    .btn:hover {
+      transform: scale(1.1);
     }
-
-    #noBtn {
-      background-color: #ddd;
-      color: #333;
-      position: absolute;
-    }
-
-    .poem {
-      display: none;
-      margin-top: 60px;
-      font-size: 1.4em;
-      color: #800040;
-      animation: showPoem 1.5s ease forwards;
-      opacity: 0;
-      transform: scale(0.95);
-    }
-
-    @keyframes showPoem {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .heart {
-      width: 15px;
-      height: 15px;
-      background: red;
       position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
       transform: rotate(45deg);
-      animation: float 6s linear infinite;
+      animation: float 8s linear infinite;
     }
-
-    .heart::before, .heart::after {
+    .heart::before,
+    .heart::after {
       content: '';
-      width: 15px;
-      height: 15px;
+      position: absolute;
+      width: 20px;
+      height: 20px;
       background: red;
       border-radius: 50%;
-      position: absolute;
     }
-
     .heart::before {
-      top: -7.5px;
+      top: -10px;
       left: 0;
     }
-
     .heart::after {
-      left: -7.5px;
+      left: -10px;
       top: 0;
     }
-
     @keyframes float {
-      0% {
-        transform: translateY(0) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-600px) rotate(45deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-
-  <div class="question">Em có yêu anh không 🤰</div>
-  <div class="buttons">
-    <button id="yesBtn">Có</button>
-    <button id="noBtn">Không</button>
+  <h1>Em có yêu anh không, Mai?</h1>
+  <div class="btn-container">
+    <button class="btn yes" onclick="showLove()">Có</button>
+    <button class="btn no" id="noBtn" onmouseover="moveButton(this)">Không</button>
   </div>
+  <div id="typed-text"></div>
+  <div id="counter"></div>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3" />
+  </audio>  <script>
+    function showLove() {
+      document.querySelector('.btn-container').style.display = 'none';
+      document.getElementById('typed-text').style.display = 'block';
+      document.getElementById('counter').style.display = 'block';
+      type();
+    }
 
-  <div class="poem" id="poem">
-    <p>
-      Từ khi gặp em, tim anh loạn nhịp,<br>
-      Mỗi ánh mắt em là một vần thơ.<br>
-      Dẫu đời có bao giông gió bất ngờ,<br>
-      Anh chỉ cần em – chẳng mơ điều khác.<br><br>
-      Nguyễn Ngọc Chi Mai, em là cả thế giới của anh!
-    </p>
-  </div>
+    function moveButton(btn) {
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      btn.style.position = 'absolute';
+      btn.style.left = `${x}px`;
+      btn.style.top = `${y}px`;
+    }
 
-  <script>
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const poem = document.getElementById('poem');
-    const buttons = document.querySelector('.buttons');
-    const question = document.querySelector('.question');
+    const messages = [
+      "Từ ngày gặp Mai, cuộc sống của anh trở nên rực rỡ hơn...",
+      "Anh yêu nụ cười của em, ánh mắt của em, từng điều nhỏ nhặt...",
+      "Mỗi ngày trôi qua, anh càng chắc chắn rằng: ANH YÊU MAI."
+    ];
+    let i = 0, j = 0, currentText = '', isDeleting = false;
+    const el = document.getElementById('typed-text');
 
-    yesBtn.addEventListener('click', () => {
-      poem.style.display = 'block';
-      buttons.style.display = 'none';
-      question.style.display = 'none';
-    });
+    function type() {
+      if (i < messages.length) {
+        if (!isDeleting && j <= messages[i].length) {
+          currentText = messages[i].substring(0, j++);
+        } else if (isDeleting && j >= 0) {
+          currentText = messages[i].substring(0, j--);
+        }
 
-    // Nút "Không" né chuột
-    noBtn.addEventListener('mouseover', () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
-      const scale = 0.8 + Math.random() * 0.5;
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-      noBtn.style.transform = `scale(${scale}) rotate(${Math.random() * 360}deg)`;
-    });
+        el.innerHTML = currentText;
+
+        if (j === messages[i].length) {
+          isDeleting = true;
+          setTimeout(type, 1500);
+        } else if (isDeleting && j === 0) {
+          isDeleting = false;
+          i++;
+        }
+        setTimeout(type, 100);
+      }
+    }
+
+    // Đếm ngày yêu nhau
+    const startDate = new Date("2025-01-31");
+    const now = new Date();
+    const diffTime = Math.abs(now - startDate);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById('counter').innerText = `Tụi mình đã yêu nhau được ${diffDays} ngày rồi đó Mai à!`;
 
     // Trái tim bay
     setInterval(() => {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.top = '100%';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.style.animationDuration = 3 + Math.random() * 5 + 's';
       document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
-  </script>
-</body>
+      setTimeout(() => heart.remove(), 8000);
+    }, 500);
+  </script></body>
 </html>
