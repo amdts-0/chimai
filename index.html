@@ -1,164 +1,117 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gửi Mai</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(to right, #ffe0f0, #ffe6cc);
-      overflow-x: hidden;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Mai</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ffe0f0, #ffe6cc);
+            overflow-x: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    .header {
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #d63384;
-    }
+        .header {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+        }
 
-    .images {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 20px 0;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+        .images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-    .images img {
-      width: 150px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s;
-    }
+        .images img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
 
-    .images img:hover {
-      transform: scale(1.1);
-    }
+        .images img:hover {
+            transform: scale(1.1);
+        }
 
-    .love-text {
-      font-size: 18px;
-      color: #444;
-      margin: 10px 20px;
-      max-width: 600px;
-    }
+        .love-text {
+            font-size: 18px;
+            color: #444;
+            margin: 10px 20px;
+        }
 
-    .btn {
-      display: inline-block;
-      background-color: #ff5e78;
-      color: white;
-      padding: 12px 24px;
-      margin: 20px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
+        .btn {
+            display: inline-block;
+            background-color: #ff5e78;
+            color: white;
+            padding: 12px 24px;
+            margin: 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-    .btn:hover {
-      background-color: #ff2e56;
-    }
+        .btn:hover {
+            background-color: #ff2e56;
+        }
 
-    #mainContent {
-      display: none;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-    }
+        #mainContent {
+            display: none;
+        }
 
-    #mainContent.show {
-      display: block;
-      opacity: 1;
-    }
+        #questionSection {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-    #questionSection {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .typewriter {
-      display: inline-block;
-      border-right: 2px solid #d63384;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #d63384 }
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <div id="questionSection">
-    <div class="love-text">Em có yêu anh không?</div>
-    <a href="#" class="btn" id="yesBtn">Có</a>
-  </div>
-
-  <div id="mainContent">
-    <div class="header">💗 Love Chimaii 💗</div>
-
-    <div class="images">
-      <img src="boy.jpg" alt="Bé trai là: Dinh Hoang">
-      <img src="girl.jpg" alt="Bé gái là: Chi Mai">
+    <div id="questionSection">
+        <div class="love-text">Em có yêu anh không?</div>
+        <a href="#" class="btn" id="yesBtn">Có</a>
     </div>
 
-    <div class="love-text">
-      <span id="typeText" class="typewriter"></span>
+    <div id="mainContent">
+        <div class="header">💗 Love Chimaii 💗</div>
+
+        <div class="images">
+            <img src="boy.jpg" alt="Bé trai là: Dinh Hoang">
+            <img src="girl.jpg" alt="Bé gái là: Chi Mai">
+        </div>
+
+        <div class="love-text">
+            Hạnh Phúc Cuộc Đời Anh Chỉ Đơn Giản Là Có Em Trong Đời:3 <br>
+            Anh Và Em Đã Đồng Hành Đi Trên Con Đường Này Được 95 Day Rồi Đấy Chimai (31/01/2025)
+        </div>
     </div>
-  </div>
 
-  <script>
-    document.getElementById('yesBtn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('questionSection').style.display = 'none';
-
-      const main = document.getElementById('mainContent');
-      main.classList.add('show');
-
-      // Đếm số ngày yêu
-      const startDate = new Date("2025-01-31");
-      const today = new Date();
-      const diffTime = Math.abs(today - startDate);
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-
-      // Nội dung typewriter
-      const text = `Hạnh Phúc Cuộc Đời Anh Chỉ Đơn Giản Là Có Em Trong Đời:3\nAnh Và Em Đã Đồng Hành Đi Trên Con Đường Này Được ${diffDays} ngày rồi đấy Chimai (31/01/2025)`;
-      const typeText = document.getElementById('typeText');
-      let i = 0;
-
-      function typeWriter() {
-        if (i < text.length) {
-          typeText.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
-      }
-
-      setTimeout(typeWriter, 500); // delay để mượt hơn
-    });
-  </script>
+    <script>
+        document.getElementById('yesBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('questionSection').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        });
+    </script>
 
 </body>
 </html>
