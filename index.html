@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gửi Mai</title>
   <style>
     body {
@@ -52,7 +52,6 @@
       font-size: 18px;
       color: #444;
       margin: 10px 20px;
-      max-width: 600px;
     }
 
     .btn {
@@ -74,7 +73,7 @@
     #mainContent {
       display: none;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      transition: opacity 1s ease-in-out;
     }
 
     #mainContent.show {
@@ -90,22 +89,12 @@
       align-items: center;
     }
 
-    .typewriter {
+    #typeText {
       display: inline-block;
-      border-right: 2px solid #d63384;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #d63384 }
+      text-align: center;
+      line-height: 1.6;
+      max-width: 90%;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -120,13 +109,11 @@
     <div class="header">💗 Love Chimaii 💗</div>
 
     <div class="images">
-      <img src="boy.jpg" alt="Bé trai là: Dinh Hoang">
-      <img src="girl.jpg" alt="Bé gái là: Chi Mai">
+      <img src="boy.jpg" alt="Bé trai là: Dinh Hoang" />
+      <img src="girl.jpg" alt="Bé gái là: Chi Mai" />
     </div>
 
-    <div class="love-text">
-      <span id="typeText" class="typewriter"></span>
-    </div>
+    <div class="love-text" id="typeText"></div>
   </div>
 
   <script>
@@ -137,26 +124,42 @@
       const main = document.getElementById('mainContent');
       main.classList.add('show');
 
-      // Đếm số ngày yêu
+      // Tính số ngày yêu
       const startDate = new Date("2025-01-31");
       const today = new Date();
       const diffTime = Math.abs(today - startDate);
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-      // Nội dung typewriter
-      const text = `Hạnh Phúc Cuộc Đời Anh Chỉ Đơn Giản Là Có Em Trong Đời:3\nAnh Và Em Đã Đồng Hành Đi Trên Con Đường Này Được ${diffDays} ngày rồi đấy Chimai (31/01/2025)`;
+      // Nội dung chia dòng
+      const textLines = [
+        "Hạnh phúc cuộc đời anh chỉ đơn giản là có em trong đời :3",
+        `Anh và em đã đồng hành đi trên con đường này được ${diffDays} ngày rồi đấy Chimai (31/01/2025)`
+      ];
+
       const typeText = document.getElementById('typeText');
-      let i = 0;
+      let allWords = textLines[0].split(" ");
+      let index = 0;
+      let currentLine = "";
 
       function typeWriter() {
-        if (i < text.length) {
-          typeText.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
+        if (index < allWords.length) {
+          currentLine += allWords[index] + " ";
+          index++;
+
+          if (index % 7 === 0 || index === allWords.length) {
+            typeText.innerHTML += currentLine.trim() + "<br>";
+            currentLine = "";
+          }
+
+          setTimeout(typeWriter, 80);
+        } else {
+          setTimeout(() => {
+            typeText.innerHTML += "<br>" + textLines[1];
+          }, 600);
         }
       }
 
-      setTimeout(typeWriter, 500); // delay để mượt hơn
+      setTimeout(typeWriter, 500);
     });
   </script>
 
