@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gửi Mai</title>
   <style>
     body {
@@ -36,8 +36,8 @@
     }
 
     .images img {
-      width: 130px;
-      height: 170px;
+      width: 150px;
+      height: 200px;
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -49,11 +49,10 @@
     }
 
     .love-text {
-      font-size: 16px;
+      font-size: 18px;
       color: #444;
       margin: 10px 20px;
-      line-height: 1.6;
-      text-align: center;
+      max-width: 600px;
     }
 
     .btn {
@@ -75,7 +74,7 @@
     #mainContent {
       display: none;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 1.2s ease;
     }
 
     #mainContent.show {
@@ -91,34 +90,22 @@
       align-items: center;
     }
 
-    #typeText {
+    .typewriter {
       display: inline-block;
-      text-align: center;
-      line-height: 1.6;
-      margin-top: 10px;
-      max-width: 90%;
-      word-wrap: break-word;
+      border-right: 2px solid #d63384;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
     }
 
-    @media (max-width: 480px) {
-      .header {
-        font-size: 20px;
-      }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
 
-      .images img {
-        width: 100px;
-        height: 130px;
-      }
-
-      .love-text {
-        font-size: 14px;
-        padding: 0 10px;
-      }
-
-      .btn {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #d63384 }
     }
   </style>
 </head>
@@ -133,11 +120,13 @@
     <div class="header">💗 Love Chimaii 💗</div>
 
     <div class="images">
-      <img src="boy.jpg" alt="Bé trai là: Dinh Hoang" />
-      <img src="girl.jpg" alt="Bé gái là: Chi Mai" />
+      <img src="boy.jpg" alt="Bé trai là: Dinh Hoang">
+      <img src="girl.jpg" alt="Bé gái là: Chi Mai">
     </div>
 
-    <div class="love-text" id="typeText"></div>
+    <div class="love-text">
+      <span id="typeText" class="typewriter"></span>
+    </div>
   </div>
 
   <script>
@@ -148,46 +137,26 @@
       const main = document.getElementById('mainContent');
       main.classList.add('show');
 
-      // Tính số ngày yêu
+      // Đếm số ngày yêu
       const startDate = new Date("2025-01-31");
       const today = new Date();
       const diffTime = Math.abs(today - startDate);
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-      // Nội dung chia dòng
-      const textLines = [
-        "Hạnh phúc cuộc đời anh chỉ đơn giản là có em trong đời :3",
-        `Anh và em đã đồng hành đi trên con đường này được ${diffDays} ngày rồi đấy Chimai (31/01/2025)`
-      ];
-
+      // Nội dung typewriter
+      const text = `Hạnh Phúc Cuộc Đời Anh Chỉ Đơn Giản Là Có Em Trong Đời:3\nAnh Và Em Đã Đồng Hành Đi Trên Con Đường Này Được ${diffDays} ngày rồi đấy Chimai (31/01/2025)`;
       const typeText = document.getElementById('typeText');
-      let allWords = textLines[0].split(" ");
-      let index = 0;
-      let currentLine = "";
+      let i = 0;
 
       function typeWriter() {
-        if (index < allWords.length) {
-          currentLine += allWords[index] + " ";
-          index++;
-
-          if (index % 7 === 0 || index === allWords.length) {
-            typeText.innerHTML += currentLine.trim() + "<br>";
-            currentLine = "";
-          }
-
-          setTimeout(typeWriter, 80);
-        } else {
-          setTimeout(() => {
-            // Gõ tiếp dòng thứ 2
-            allWords = textLines[1].split(" ");
-            index = 0;
-            currentLine = "";
-            typeWriter();
-          }, 600);
+        if (i < text.length) {
+          typeText.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
         }
       }
 
-      setTimeout(typeWriter, 500);
+      setTimeout(typeWriter, 500); // delay để mượt hơn
     });
   </script>
 
