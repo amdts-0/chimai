@@ -31,22 +31,17 @@
       display: none;
     }
     .heart-counter {
-      position: relative;
       display: none;
-      width: 200px;
-      height: 180px;
       margin: 20px auto;
-      z-index: 5;
     }
-    .heart-shape {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 180px;
-      background: red;
-      clip-path: path('M100,30 C90,0,0,0,0,60 C0,120,100,180,100,180 C100,180,200,120,200,60 C200,0,110,0,100,30 Z');
+    .heart-svg {
+      width: 220px;
+      height: 200px;
+      margin: 0 auto;
       animation: pulse 2s infinite;
+    }
+    .heart-svg path {
+      fill: #ff4d6d;
     }
     @keyframes pulse {
       0% { transform: scale(1); }
@@ -60,7 +55,6 @@
       transform: translate(-50%, -50%);
       font-size: 1em;
       color: white;
-      padding: 10px;
       width: 90%;
     }
     .btn-container {
@@ -135,7 +129,9 @@
   </div>
   <div id="typed-text"></div>
   <div class="heart-counter" id="heartCounter">
-    <div class="heart-shape"></div>
+    <svg class="heart-svg" viewBox="0 0 512 512">
+      <path d="M471.701,73.511c-54.459-46.94-136.265-38.87-186.366,13.96l-19.335,20.308l-19.336-20.308  c-50.1-52.83-131.906-60.9-186.364-13.96c-62.442,53.854-66.033,149.584-9.455,207.921l193.038,202.596  c3.637,3.817,8.541,5.938,13.556,5.938c5.015,0,9.919-2.121,13.557-5.938l193.038-202.596  C537.733,223.095,534.142,127.365,471.701,73.511z"/>
+    </svg>
     <div id="counter"></div>
   </div>
   <audio autoplay loop>
