@@ -4,44 +4,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gửi Mai yêu dấu</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom right, #ffe6f0, #ffe0e6);
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     h1 {
-      font-size: 2.2em;
+      font-size: 2em;
       color: #d6336c;
-      margin-top: 50px;
-      animation: fadeIn 2s ease-in;
+      margin: 20px;
     }
     #typed-text {
-      font-size: 1.5em;
+      font-size: 1.2em;
       color: #555;
-      margin: 30px;
+      margin: 20px;
       min-height: 60px;
       display: none;
     }
-    #counter {
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #8b0000;
+    .heart-counter {
+      position: relative;
       display: none;
+      width: 200px;
+      height: 180px;
+      margin: 20px auto;
+      z-index: 5;
+    }
+    .heart-shape {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 180px;
+      background: red;
+      clip-path: path('M100,30 C90,0,0,0,0,60 C0,120,100,180,100,180 C100,180,200,120,200,60 C200,0,110,0,100,30 Z');
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    #counter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1em;
+      color: white;
+      padding: 10px;
+      width: 90%;
     }
     .btn-container {
-      margin-top: 30px;
+      margin: 20px;
     }
     .btn {
-      padding: 15px 30px;
+      padding: 12px 25px;
       font-size: 1em;
       border: none;
       border-radius: 12px;
       margin: 10px;
       cursor: pointer;
       transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .yes {
       background-color: #ff6b81;
@@ -80,13 +113,17 @@
       left: -10px;
       top: 0;
     }
-    @keyframes float {
-      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-800px) rotate(45deg); opacity: 0; }
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: yellow;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(10); opacity: 0; }
     }
   </style>
 </head>
@@ -97,70 +134,87 @@
     <button class="btn no" id="noBtn" onmouseover="moveButton(this)">Không</button>
   </div>
   <div id="typed-text"></div>
-  <div id="counter"></div>
+  <div class="heart-counter" id="heartCounter">
+    <div class="heart-shape"></div>
+    <div id="counter"></div>
+  </div>
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3" />
-  </audio>  <script>
+  </audio>
+  <audio id="voice" src="https://www.soundjay.com/human/sounds/i-love-you-1.mp3"></audio>
+  <script>
     function showLove() {
       document.querySelector('.btn-container').style.display = 'none';
       document.getElementById('typed-text').style.display = 'block';
-      document.getElementById('counter').style.display = 'block';
+      document.getElementById('heartCounter').style.display = 'block';
+      document.body.style.background = '#fff0f5';
+      document.getElementById('voice').play();
       type();
+      launchFireworks();
+    }function moveButton(btn) {
+  const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+  btn.style.position = 'absolute';
+  btn.style.left = `${x}px`;
+  btn.style.top = `${y}px`;
+}
+
+const messages = [
+  "Từ ngày gặp Mai, cuộc sống của anh trở nên rực rỡ hơn...",
+  "Anh yêu nụ cười của em, ánh mắt của em, từng điều nhỏ nhặt...",
+  "Mỗi ngày trôi qua, anh càng chắc chắn rằng: ANH YÊU MAI."
+];
+let i = 0, j = 0, currentText = '', isDeleting = false;
+const el = document.getElementById('typed-text');
+
+function type() {
+  if (i < messages.length) {
+    if (!isDeleting && j <= messages[i].length) {
+      currentText = messages[i].substring(0, j++);
+    } else if (isDeleting && j >= 0) {
+      currentText = messages[i].substring(0, j--);
     }
 
-    function moveButton(btn) {
-      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-      btn.style.position = 'absolute';
-      btn.style.left = `${x}px`;
-      btn.style.top = `${y}px`;
+    el.innerHTML = currentText;
+
+    if (j === messages[i].length) {
+      isDeleting = true;
+      setTimeout(type, 1500);
+    } else if (isDeleting && j === 0) {
+      isDeleting = false;
+      i++;
     }
+    setTimeout(type, 100);
+  }
+}
 
-    const messages = [
-      "Từ ngày gặp Mai, cuộc sống của anh trở nên rực rỡ hơn...",
-      "Anh yêu nụ cười của em, ánh mắt của em, từng điều nhỏ nhặt...",
-      "Mỗi ngày trôi qua, anh càng chắc chắn rằng: ANH YÊU MAI."
-    ];
-    let i = 0, j = 0, currentText = '', isDeleting = false;
-    const el = document.getElementById('typed-text');
+const startDate = new Date("2025-01-31");
+const now = new Date();
+const diffTime = Math.abs(now - startDate);
+const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+document.getElementById('counter').innerText = `Tụi mình đã yêu nhau được ${diffDays} ngày rồi đó Mai à!`;
 
-    function type() {
-      if (i < messages.length) {
-        if (!isDeleting && j <= messages[i].length) {
-          currentText = messages[i].substring(0, j++);
-        } else if (isDeleting && j >= 0) {
-          currentText = messages[i].substring(0, j--);
-        }
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.top = '100vh';
+  heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}, 500);
 
-        el.innerHTML = currentText;
+function launchFireworks() {
+  for (let i = 0; i < 30; i++) {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    firework.style.left = Math.random() * 100 + 'vw';
+    firework.style.top = Math.random() * 100 + 'vh';
+    document.body.appendChild(firework);
+    setTimeout(() => firework.remove(), 1000);
+  }
+}
 
-        if (j === messages[i].length) {
-          isDeleting = true;
-          setTimeout(type, 1500);
-        } else if (isDeleting && j === 0) {
-          isDeleting = false;
-          i++;
-        }
-        setTimeout(type, 100);
-      }
-    }
-
-    // Đếm ngày yêu nhau
-    const startDate = new Date("2025-01-31");
-    const now = new Date();
-    const diffTime = Math.abs(now - startDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('counter').innerText = `Tụi mình đã yêu nhau được ${diffDays} ngày rồi đó Mai à!`;
-
-    // Trái tim bay
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.top = '100vh';
-      heart.style.animationDuration = 3 + Math.random() * 5 + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
-    }, 500);
-  </script></body>
+  </script>
+</body>
 </html>
