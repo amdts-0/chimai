@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="vi">
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,79 +12,91 @@
             background: linear-gradient(to right, #ffe0f0, #ffe6cc);
             overflow-x: hidden;
             text-align: center;
-        }.header {
-        padding: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #d63384;
-    }
+        }
+        .header {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+        }
 
-    .images {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
+        .images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-    .images img {
-        width: 150px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 16px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s;
-    }
+        .images img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
 
-    .images img:hover {
-        transform: scale(1.1);
-    }
+        .images img:hover {
+            transform: scale(1.1);
+        }
 
-    .love-text {
-        font-size: 18px;
-        color: #444;
-        margin: 10px 20px;
-    }
+        .love-text {
+            font-size: 18px;
+            color: #444;
+            margin: 10px 20px;
+        }
 
-    .btn-group {
-        margin-top: 30px;
-    }
+        .btn-group {
+            margin-top: 30px;
+        }
 
-    .btn {
-        display: inline-block;
-        background-color: #ff5e78;
-        color: white;
-        padding: 12px 24px;
-        margin: 10px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: background-color 0.3s;
-    }
+        .btn {
+            display: inline-block;
+            background-color: #ff5e78;
+            color: white;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
 
-    .btn:hover {
-        background-color: #ff2e56;
-    }
-</style>
-
+        .btn:hover {
+            background-color: #ff2e56;
+        }
+    </style>
 </head>
 <body>
-    <div class="header">Gửi Chi Mai yêu dấu</div><div class="images">
-    <img src="boy.jpg" alt="Bé trai">
-    <img src="girl.jpg" alt="Bé gái">
-</div>
+    <div class="header">Gửi Chi Mai yêu dấu</div>
+    <div class="images">
+        <img src="boy.jpg" alt="Bé trai là: Dinh Hoang">
+        <img src="girl.jpg" alt="Bé gái là: Chi Mai">
+    </div>
 
-<div class="love-text">
-    Cảm ơn em vì đã xuất hiện trong cuộc đời anh. <br>
-    Chúng mình đã bên nhau từ ngày 31/01/2025 và mỗi ngày đều đáng quý!
-</div>
+    <div class="love-text">
+        Cảm ơn em vì đã xuất hiện trong cuộc đời anh. <br>
+        Chúng mình đã bên nhau từ ngày 31/01/2025 và mỗi ngày đều đáng quý!
+    </div>
 
-<div class="btn-group">
-    <a href="#" class="btn">Nhắn tin</a>
-    <a href="#" class="btn">Gọi điện</a>
-    <a href="#" class="btn">Xem ảnh</a>
-</div>
+    <div class="love-text">
+        Em có yêu anh không?
+    </div>
 
+    <div class="btn-group">
+        <a href="#" class="btn" id="yesBtn">Có</a>
+    </div>
+
+    <div id="responseText" class="love-text" style="display: none;">
+        Hiện tại.
+    </div>
+
+    <script>
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('responseText').style.display = 'block'; 
+        });
+    </script>
 </body>
 </html>
